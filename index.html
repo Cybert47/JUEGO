@@ -1,0 +1,95 @@
+
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Relaciona Palabras</title>
+  </head>
+  <body>
+    <div class="oscuro">
+    <h1>Relaciona las Palabras</h1>
+    
+      <div class="contenedor">
+      <div class="columna1">
+        <div class="caja" data-respuesta="cirugia">Cataratas</div>
+        <div class="caja" data-respuesta="quimioterapia">Cancer</div>
+        <div class="caja" data-respuesta="dieta-dosis">Diabetes</div>
+        <div class="caja" data-respuesta="fisioterapia">Artrosis</div>
+      </div>
+      <div class="columna2">
+        <div class="caja" data-palabra="cirugia">Facoemulsificación</div>
+        <div class="caja" data-palabra="quimioterapia">Quimioterapia</div>
+        <div class="caja" data-palabra="dieta-dosis">Dieta y dosis de insulina</div>
+        <div class="caja" data-palabra="fisioterapia">Fisioterapia</div>
+      </div>
+        
+    </div>
+     <button id="comprobar">Comprobar</button>
+    <button id="reiniciar">Reiniciar</button>
+ <img src="creacti c.jpg">
+    </div>
+    <div class="ok">
+
+         
+    </div>
+
+ 
+    
+   
+
+    <div id="modal" class="modal">
+      <div class="modal-contenido">
+        <span class="cerrar">&times;</span>
+        <p>Tu puntuación es: <span id="puntuacion"></span></p>
+      </div>
+    </div>
+    <script type="text/javascript" src="reiniciar.js"></script>
+    <script src="index.js"></script>
+    <script type="text/javascript">
+      const palabras = document.querySelectorAll(".columna1 .caja");
+const respuestas = document.querySelectorAll(".columna2 .caja");
+
+let seleccionado = null;
+let respuestaCorrecta = null;
+
+palabras.forEach((palabra) => {
+  palabra.addEventListener("click", () => {
+    // Comprobar si la palabra seleccionada ya está marcada como seleccionada
+    if (seleccionado && seleccionado !== palabra) {
+      seleccionado.classList.remove("seleccionado");
+    }
+
+    seleccionado = palabra;
+
+    // Marcar como seleccionado
+    palabra.classList.toggle("seleccionado");
+  });
+});
+
+respuestas.forEach((respuesta) => {
+  respuesta.addEventListener("click", () => {
+    // Comprobar si ya hay una respuesta seleccionada
+    if (respuestaCorrecta && respuestaCorrecta !== respuesta) {
+      respuestaCorrecta.classList.remove("seleccionado");
+    }
+
+    respuestaCorrecta = respuesta;
+
+    // Comprobar si la respuesta seleccionada es correcta
+    if (
+      seleccionado.dataset.respuesta === respuesta.dataset.palabra &&
+      seleccionado && respuestaCorrecta
+    ) {
+      // Ambas cajas se colocan en color verde
+      seleccionado.classList.add("correcto");
+      respuestaCorrecta.classList.add("correcto");
+    } else if (seleccionado && respuestaCorrecta) {
+      // Ambas cajas se colocan en color rojo
+      seleccionado.classList.add("incorrecto");
+      respuestaCorrecta.classList.add("incorrecto");
+    }
+  });
+});
+
+    </script>
+  </body>
+</html>
