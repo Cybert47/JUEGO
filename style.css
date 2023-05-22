@@ -16,6 +16,9 @@ h1 {
 .ok {
   text-align: center;
   margin-top: 20px;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-size: 30px;
 }
 
 .centered {
